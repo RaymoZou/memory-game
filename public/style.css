@@ -1,0 +1,29 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-container {
+    padding: 12px;
+    margin: 100px;
+    gap: 8px;
+    display: flex;
+    background-color: palegreen;
+}
+
+.card {
+    display: flex;
+    padding: 8px;
+    background-color: lightblue;
+}
+
+.score {
+    font-size: 72px;
+}
