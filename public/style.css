@@ -6,6 +6,10 @@
     font-family: 'Comic Neue', cursive;
 }
 
+body {
+    background-color: #B5D5C5;
+}
+
 #root {
     display: flex;
     flex-direction: column;
@@ -15,18 +19,19 @@
 
 .card-container {
     padding: 12px;
-    margin: 100px;
+    margin: 50px;
     gap: 8px;
     display: flex;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: palegreen;
+    /* background-color: lightgrey; */
 }
 
 .card {
     display: flex;
     padding: 8px;
-    background-color: lightblue;
+    background-color: #F5F5DC;
 }
 
 .card img {
@@ -36,6 +41,26 @@
     max-height: 200px;
 }
 
-.score {
+.score-container {
+    gap: 100px;
+    width: 100vw;
+    margin: 24px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
     font-size: 72px;
+    font-weight: bolder;
+}
+
+.score-container div {
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.score-container .current-score {
+    background-color: #B08BBB;
+}
+
+.score-container .best-score {
+    background-color: #ECA869;
 }

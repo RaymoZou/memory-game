@@ -53,7 +53,6 @@ function App() {
       if (numArr.indexOf(num) === -1) numArr.push(num);
     }
     for (let i = 0; i < numArr.length; i++) {
-      console.log(cards[numArr[i]]);
       scrambledCards.push(cards[numArr[i]]);
     }
     setCards(scrambledCards);
@@ -61,7 +60,10 @@ function App() {
 
   return (
     <>
-      <div className="score">Score: {score} Best score: {bestScore}</div>
+    <div className="score-container">
+      <div className="current-score">Score: {score}</div>
+      <div className="best-score">Best Score: {bestScore}</div>
+    </div>
       <div className="card-container">
         {cards.map(card => <Card
           handleClick={handleClick}
