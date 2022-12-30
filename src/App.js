@@ -1,42 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { v4 as uuiv4 } from 'uuid';
 
 function App() {
 
-  const [cards, setCards] = useState([{ title: 'card 1', isClicked: false, id: uuiv4() },
-  { title: 'card 2', isClicked: false, id: uuiv4() },
-  { title: 'card 3', isClicked: false, id: uuiv4() }]);
+  const [cards, setCards] = useState([
+    { imgURL: 'https://imgflip.com/s/meme/Distracted-Boyfriend.jpg', id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Running-Away-Balloon.jpg', id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Mocking-Spongebob.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Epic-Handshake.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Disaster-Girl.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Ancient-Aliens.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/X-X-Everywhere.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Waiting-Skeleton.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Roll-Safe-Think-About-It.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Futurama-Fry.jpg', isClicked: false, id: uuiv4() },
+    { imgURL: 'https://imgflip.com/s/meme/Leonardo-Dicaprio-Cheers.jpg', isClicked: false, id: uuiv4() },
+  ]);
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(score);
+  const [clickedCards, setClickedCards] = useState([]);
+
+  useEffect(() => {
+    if (score >= bestScore) setBestScore(score);
+  }, [score, bestScore])
 
   function incrementScore() {
     setScore(score + 1);
-  }
+  };
 
-  function resetScore() {
-    setScore(0);
-  }
+  function resetScore() {setScore(0)};
 
   function handleClick(cardId) {
+
     const clickedCard = cards.find(card => card.id === cardId);
-    if (!clickedCard.isClicked) {
+
+    if (!clickedCards.includes(clickedCard)) {
       incrementScore();
-      setCards(cards.map(card => (card === clickedCard ? { ...card, isClicked: true } : card)))
+      setClickedCards([...clickedCards, clickedCard])
+      scrambleCards();
     } else {
       resetScore();
-      // TODO: change the isClicked of each card back to false;
+      setClickedCards([]);
     }
   };
 
+  function scrambleCards() {
+    var scrambledCards = [];
+    var numArr = [];
+    while (numArr.length < cards.length) {
+      var num = Math.floor(Math.random() * cards.length);
+      if (numArr.indexOf(num) === -1) numArr.push(num);
+    }
+    for (let i = 0; i < numArr.length; i++) {
+      console.log(cards[numArr[i]]);
+      scrambledCards.push(cards[numArr[i]]);
+    }
+    setCards(scrambledCards);
+  }
+
   return (
     <>
-      <div className="score">{score}</div>
+      <div className="score">Score: {score} Best score: {bestScore}</div>
       <div className="card-container">
         {cards.map(card => <Card
           handleClick={handleClick}
           id={card.id}
           key={card.id}
-          title={card.title}>
+          imgURL={card.imgURL}>
         </Card>)}
       </div>
     </>
